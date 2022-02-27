@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "57a35eea-656d-45ad-ad85-3acd023a0985",
+		"name": "NY times",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "arcticle test whis filters",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=Ukraine&api-key=IENoZB859Muimgfy8uMTm93tjIG3FhQ7",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nytimes",
+						"com"
+					],
+					"path": [
+						"svc",
+						"search",
+						"v2",
+						"articlesearch.json"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Ukraine"
+						},
+						{
+							"key": "api-key",
+							"value": "IENoZB859Muimgfy8uMTm93tjIG3FhQ7"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
