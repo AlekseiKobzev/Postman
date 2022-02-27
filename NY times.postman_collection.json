@@ -7,14 +7,37 @@
 	"item": [
 		{
 			"name": "arcticle test whis filters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Ukraine\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Zelensky\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
 				"url": {
-					"raw": "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=Ukraine&api-key=IENoZB859Muimgfy8uMTm93tjIG3FhQ7",
+					"raw": "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=Ukraine&api-key=IENoZB859Muimgfy8uMTm93tjIG3FhQ7&fq=Zelensky",
 					"protocol": "https",
 					"host": [
 						"api",
@@ -35,6 +58,10 @@
 						{
 							"key": "api-key",
 							"value": "IENoZB859Muimgfy8uMTm93tjIG3FhQ7"
+						},
+						{
+							"key": "fq",
+							"value": "Zelensky"
 						}
 					]
 				}
