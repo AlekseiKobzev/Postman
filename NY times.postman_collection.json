@@ -67,6 +67,60 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Best Sellers list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"num_results_chek\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.num_results).to.eql(15);\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url-list-books}}?api-key={{api-key}}&list=hardcover-nonfiction&published-date=2022-03-06",
+					"host": [
+						"{{url-list-books}}"
+					],
+					"query": [
+						{
+							"key": "api-key",
+							"value": "{{api-key}}"
+						},
+						{
+							"key": "list",
+							"value": "hardcover-nonfiction"
+						},
+						{
+							"key": "published-date",
+							"value": "2022-03-06"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "url-list-books",
+			"value": "https://api.nytimes.com/svc/books/v3/lists.json"
 		}
 	]
 }
