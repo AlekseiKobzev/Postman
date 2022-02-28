@@ -37,7 +37,7 @@
 					"formdata": []
 				},
 				"url": {
-					"raw": "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=Ukraine&api-key=IENoZB859Muimgfy8uMTm93tjIG3FhQ7&fq=Zelensky",
+					"raw": "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=New Zeland&api-key=IENoZB859Muimgfy8uMTm93tjIG3FhQ7&fq=",
 					"protocol": "https",
 					"host": [
 						"api",
@@ -53,7 +53,7 @@
 					"query": [
 						{
 							"key": "q",
-							"value": "Ukraine"
+							"value": "New Zeland"
 						},
 						{
 							"key": "api-key",
@@ -61,7 +61,7 @@
 						},
 						{
 							"key": "fq",
-							"value": "Zelensky"
+							"value": ""
 						}
 					]
 				}
