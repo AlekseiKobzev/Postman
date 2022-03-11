@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "33a24716-3d67-4eb9-9ec2-d9cc7668d707",
+		"name": "HW2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1st",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"This is the first responce from server!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/first",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"first"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2nd",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json()\r",
+							"\r",
+							"\r",
+							"pm.test(\"name = 'Aleksei'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"Aleksei\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Age = 34\", function(){\r",
+							"    pm.expect(+jsonData.age).to.eql(34)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Salary = 30000\",function(){\r",
+							"    pm.expect(jsonData.salary).to.eql(30000)\r",
+							"})\r",
+							"\r",
+							"var reqData = request.data\r",
+							"\r",
+							"console.log(\"request = \", reqData)\r",
+							"\r",
+							"pm.test(\"Name correct\",function(){\r",
+							"    pm.expect(jsonData.name).to.eql(reqData.name)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Age correct\", function(){\r",
+							"    pm.expect(jsonData.age).to.eql(reqData.age)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Salary correct\", function(){\r",
+							"    pm.expect(jsonData.salary).to.eql(+reqData.salary)\r",
+							"})\r",
+							"\r",
+							"console.log(\"Family = \", jsonData.family)\r",
+							"\r",
+							"\r",
+							"pm.test(\"Salary 1.5 year = salary*4\", function(){\r",
+							"    pm.expect(jsonData.family.u_salary_1_5_year).to.eql(reqData.salary*4)\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Aleksei",
+							"type": "default"
+						},
+						{
+							"key": "age",
+							"value": "34",
+							"type": "default"
+						},
+						{
+							"key": "salary",
+							"value": "30000",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/user_info_3",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
