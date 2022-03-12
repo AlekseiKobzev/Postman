@@ -139,6 +139,85 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "3rd",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 200\", function(){                         //тест статус 200 \r",
+							"    pm.response.to.have.status(200)\r",
+							"})\r",
+							"\r",
+							"let respData = pm.response.json()                         //спарсить респонс в json\r",
+							"let reqParams = pm.request.url.query.toObject()           //спарсить реквест\r",
+							"\r",
+							"// console.log(reqParams)\r",
+							"\r",
+							"pm.test(\"name req = name resp\", function(){              //проверить, что name в ответе равно name s request (name забрать из request.)\r",
+							"    pm.expect(respData.name).to.eql(reqParams.name)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"age req = age resp\", function(){               //проверить, что age в ответе равно age s request (age забрать из request.)\r",
+							"    pm.expect(respData.age).to.eql(reqParams.age)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"salary req = salary resp\", function(){         //проверить, что salary в ответе равно salary s request (salary забрать из request.)\r",
+							"    pm.expect(respData.salary).to.eql(+reqParams.salary)\r",
+							"})\r",
+							"\r",
+							"console.log(respData.family)                            //вывести в консоль параметр family из response\r",
+							"\r",
+							"pm.test(\"key 'dog' have key 'name' \", function () {                  //проверить, что у параметра dog есть параметры name\r",
+							"    pm.expect(respData.family.pets.dog).to.have.any.key(\"name\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"key 'dog' have key 'age'\", function(){                     //проверить, что у параметра dog есть параметры age\r",
+							"    pm.expect(respData.family.pets.dog).to.have.any.key(\"age\")\r",
+							"})\r",
+							"\r",
+							"pm.test(\"dog.name=Luky\", function(){                                //проверить, что параметр name имеет значение Luky\r",
+							"    pm.expect(respData.family.pets.dog.name).to.eql(\"Luky\")         \r",
+							"})\r",
+							"\r",
+							"pm.test(\"dog.age=4\", function(){                                    //проверить, что параметр age имеет значение 4\r",
+							"    pm.expect(respData.family.pets.dog.age).to.eql(4)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/object_info_3?name=Alex&age=28&salary=35000",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Alex"
+						},
+						{
+							"key": "age",
+							"value": "28"
+						},
+						{
+							"key": "salary",
+							"value": "35000"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
