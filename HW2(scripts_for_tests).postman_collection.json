@@ -218,6 +218,97 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "4th",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code 200\", function(){\r",
+							"    pm.response.to.have.status(200)\r",
+							"})\r",
+							"\r",
+							"let respData = pm.response.json();                                       //Спарсить response body в json\r",
+							"let reqParams = pm.request.url.query.toObject();                         //Спарсить request\r",
+							"\r",
+							"pm.test(\"name req = resp\", function(){                                  //Проверить, что name в ответе равно name s request (name забрать из request.)\r",
+							"    pm.expect(respData.name).to.eql(reqParams.name)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"age req = resp\", function(){                                   //Проверить, что age в ответе равно age из request (age забрать из request.)\r",
+							"    pm.expect(respData.age).to.eql(+reqParams.age)\r",
+							"})\r",
+							"\r",
+							"//console.log(\"reqest salary\", reqParams.salary)                          //Вывести в консоль параметр salary из request.\r",
+							"//console.log(\"response salary\", respData.salary)                         //Вывести в консоль параметр salary из response.\r",
+							"\r",
+							"//console.log(respData.salary[0]);                                        //Вывести в консоль 0-й элемент параметра salary из response.\r",
+							"//console.log(respData.salary[1]);                                         //Вывести в консоль 1-й элемент параметра salary из response.\r",
+							"//console.log(respData.salary[2]);                                         //Вывести в консоль 2-й элемент параметра salary из response.\r",
+							"\r",
+							"pm.test(\"salary[0] resp = salary request\", function(){         //Проверить, что 0-й элемент параметра salary равен salary из request (salary забрать из request.)\r",
+							"    pm.expect(respData.salary[0]).to.eql(+reqParams.salary)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"salary[1] resp = salary*2 request\", function(){     //Проверить, что 1-й элемент параметра salary равен salary*2 из request (salary забрать из request.)\r",
+							"    pm.expect(+respData.salary[1]).to.eql(+reqParams.salary*2)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"salary[2] resp = salary*3 request\", function(){     //Проверить, что 2-й элемент параметра salary равен salary*3 из request (salary забрать из request.)\r",
+							"    pm.expect(+respData.salary[2]).to.eql(+reqParams.salary*3)\r",
+							"})\r",
+							"\r",
+							"pm.environment.set(\"name\", reqParams.name);                 //Создать в окружении переменную name\r",
+							"pm.environment.set(\"age\", reqParams.age);                   //Создать в окружении переменную age\r",
+							"pm.environment.set(\"salary\", reqParams.salary);             //Создать в окружении переменную salary\r",
+							"\r",
+							"\r",
+							"//Написать цикл который выведет в консоль по порядку элементы списка из параметра salary.\r",
+							"\r",
+							"let sal = 0\r",
+							"\r",
+							"while (sal < respData.salary.length){\r",
+							"    console.log(respData.salary[sal])\r",
+							"    sal++;\r",
+							"}\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/object_info_4?name=Vasiliy&age=30&salary=35000",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Vasiliy"
+						},
+						{
+							"key": "age",
+							"value": "30"
+						},
+						{
+							"key": "salary",
+							"value": "35000"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
