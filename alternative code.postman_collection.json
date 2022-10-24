@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "f2165ea6-a53a-43ce-b656-d30a790d0330",
+		"name": "alternative code",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18299507"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check for code 200\r",
+							"pm.test(\"Status code 200\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"var reqData = request.data\r",
+							"\r",
+							"ShouldBeEqual = {\r",
+							"    \"Check Start qa salary exist\": [true, jsonData.hasOwnProperty(\"start_qa_salary\")],\r",
+							"    \"Check qa salary after 6 month exist\": [true, jsonData.hasOwnProperty(\"qa_salary_after_6_months\")],\r",
+							"    \"Check qa salary after 12 month exist\": [true, jsonData.hasOwnProperty(\"qa_salary_after_12_months\")],\r",
+							"    \"Check qa salary after 1.5 yaer exist\": [true, jsonData.hasOwnProperty(\"qa_salary_after_1.5_year\")],\r",
+							"    \"Check qa salary after 3.5 yaers exist\": [true, jsonData.hasOwnProperty(\"qa_salary_after_3.5_years\")],\r",
+							"    \"Check Person param exist\": [true, jsonData.hasOwnProperty(\"person\")],\r",
+							"    \"Check Start qa salary is Eql\": [jsonData.start_qa_salary, parseInt(reqData.salary)],\r",
+							"    \"Check qa salary after 6 month is eql reqSalary*2\": [jsonData.qa_salary_after_6_months, parseInt(reqData.salary)*2],\r",
+							"    \"Check qa salary after 12 month is eql reqSalary*2.7\": [jsonData.qa_salary_after_12_months, parseInt(reqData.salary)*2.7],\r",
+							"    \"Check qa salary after 1.5 year is eql reqSalary*2\": [jsonData[\"qa_salary_after_1.5_year\"], parseInt(reqData.salary)*3.3],\r",
+							"    \"Check qa salary after 3.5 years is eql reqSalary*2\": [jsonData[\"qa_salary_after_3.5_years\"], parseInt(reqData.salary)*3.8],\r",
+							"    \"Check 1st person param is eql reqSalary\": [jsonData.person.u_name[1], parseInt(reqData.salary)],\r",
+							"    \"Check person param u_age is equal reqAge\": [jsonData.person.u_age, parseInt(reqData.age)],\r",
+							"    \"Check persom param u_salary_5_years is eqal reqSalary*4.2\": [jsonData.person.u_salary_5_years, parseInt(reqData.salary)*4.2]\r",
+							"};\r",
+							"// cycle for all tests\r",
+							"for (var [testName, compare] of Object.entries(ShouldBeEqual)){\r",
+							"    pm.test(testName, function(){\r",
+							"        pm.expect(compare[0]).to.eql(compare[1])\r",
+							"    })\r",
+							"}\r",
+							"// Logging\r",
+							"for (const [key, value] of Object.entries(jsonData.person)){\r",
+							"    console.log(key, value)\r",
+							"};\r",
+							"// console.log(reqData.salary)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Sergei",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "21",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "27000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
